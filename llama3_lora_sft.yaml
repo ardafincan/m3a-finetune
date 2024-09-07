@@ -1,0 +1,45 @@
+
+        ### model
+        model_name_or_path: t3ai-org/pt-model
+
+        ### method
+        stage: sft
+        do_train: true
+        finetuning_type: lora
+        lora_target: all
+
+        ### dataset
+        dataset: ALL
+        template: llama3
+        cutoff_len: 1024
+        max_samples: 500
+        max_length: 1024
+        overwrite_cache: true
+        preprocessing_num_workers: 16
+
+        ### output
+        output_dir: saves/llama3-8b/lora/sft
+        logging_steps: 10
+        save_steps: 90
+        plot_loss: true
+        overwrite_output_dir: false
+
+        ### train
+        per_device_train_batch_size: 8
+        gradient_accumulation_steps: 2
+        learning_rate: 1.0e-4
+        num_train_epochs: 750
+        lr_scheduler_type: linear
+        warmup_ratio: 0.1
+        bf16: true
+        ddp_timeout: 180000000
+        resume_from_checkpoint: /home/ubuntu/M3A/LLaMA-Factory/saves/llama3-8b/lora/sft/checkpoint-1500
+        lora_alpha: 6
+        lora_rank: 2
+        lora_dropout: 0.15
+
+        ### eval
+        val_size: 0.15
+        per_device_eval_batch_size: 8
+        eval_strategy: epoch
+        
